@@ -19,16 +19,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         img = findViewById(R.id.img);
-         img.animate().alpha(4000).setDuration(0);
+        img.animate().alpha(4000).setDuration(0);
 
-         handler = new Handler();
-         handler.postDelayed(new Runnable() {
-             @Override
-             public void run() {
-                 Intent dsp = new Intent(MainActivity.this,LoginActivity.class);
-                 startActivity(dsp);
-                 finish();
-             }
-         },4000);
+        handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent dsp = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(dsp);
+                finish();
+            }
+        },4000);
     }
 }
