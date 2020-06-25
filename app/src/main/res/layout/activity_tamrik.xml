@@ -63,7 +63,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/setoran"
+                android:id="@+id/penarikan"
                 android:text=""
                 android:inputType="number"/>
         </LinearLayout>
@@ -71,7 +71,7 @@
             android:layout_marginTop="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/simpan"
+            android:id="@+id/tarik"
             android:text="Tarik Tabungan"
             android:background="@color/colorAccent"
             android:textStyle="bold"
