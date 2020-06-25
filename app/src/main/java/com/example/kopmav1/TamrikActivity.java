@@ -6,23 +6,95 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class TamrikActivity extends AppCompatActivity {
-    private ProgressDialog progress;
-    Button simpan, keluar;
+    private ProgressDialog pd;
+    Button btnsimpan, btnkeluar;
+    EditText id, tarik;
+
+    private RequestQueue queue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tamrik);
+        setContentView(R.layout.activity_tamrik);queue = Volley.newRequestQueue(this);
 
-        keluar = (Button) findViewById(R.id.keluar);
-        keluar.setOnClickListener(new View.OnClickListener() {
+        id = (EditText) findViewById(R.id.id_anggota);
+        tarik = (EditText) findViewById(R.id.penarikan);
+        btnkeluar = (Button) findViewById(R.id.keluar);
+        btnsimpan = (Button) findViewById(R.id.tarik);
+        pd = new ProgressDialog(TamrikActivity.this);
+
+        btnsimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent hapus = new Intent(TamrikActivity.this,TarikActivity.class);
-                startActivity(hapus);
+                simpanData();
             }
         });
+
+        btnkeluar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent main = new Intent(TamrikActivity.this,TarikActivity.class);
+                startActivity(main);
+            }
+        });
+    }
+
+    private void simpanData()
+    {
+
+        pd.setMessage("Menyimpan Data");
+        pd.setCancelable(false);
+        pd.show();
+
+        StringRequest sendData = new StringRequest(Request.Method.POST, ApiUrl.Api_Insert1,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        pd.cancel();
+                        try {
+                            JSONObject res = new JSONObject(response);
+                            Toast.makeText(TamrikActivity.this, "pesan : "+   res.getString("message") , Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        startActivity( new Intent(TamrikActivity.this,TarikActivity.class));
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        pd.cancel();
+                        Toast.makeText(TamrikActivity.this, "pesan : Gagal Insert Data", Toast.LENGTH_SHORT).show();
+                    }
+                }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map = new HashMap<>();
+                map.put("id_anggota",id.getText().toString());
+                map.put("penarikan",tarik.getText().toString());
+                return map;
+            }
+        };
+
+        queue.add(sendData);
     }
 }
