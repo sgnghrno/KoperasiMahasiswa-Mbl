@@ -25,8 +25,8 @@ import java.util.Map;
 
 public class TambungActivty extends AppCompatActivity {
     private ProgressDialog pd;
-    Button simpan, keluar;
-    EditText id_anggota, setoran;
+    Button btnsimpan, btnkeluar;
+    EditText id, setor;
 
     private RequestQueue queue;
 
@@ -37,38 +37,20 @@ public class TambungActivty extends AppCompatActivity {
 
         queue = Volley.newRequestQueue(this);
 
-        /*get data from intent*/
-        Intent data = getIntent();
-        final int update = data.getIntExtra("update",0);
-        String intent_id_anggota = data.getStringExtra("id_anggota");
-        String intent_setoran = data.getStringExtra("setoran");
-        /*end get data from intent*/
-
-        id_anggota = (EditText) findViewById(R.id.id_anggota);
-        setoran = (EditText) findViewById(R.id.setoran);
-        keluar = (Button) findViewById(R.id.keluar);
-        simpan = (Button) findViewById(R.id.simpan);
+        id = (EditText) findViewById(R.id.id_anggota);
+        setor = (EditText) findViewById(R.id.setoran);
+        btnkeluar = (Button) findViewById(R.id.keluar);
+        btnsimpan = (Button) findViewById(R.id.tambah);
         pd = new ProgressDialog(TambungActivty.this);
 
-        /*kondisi update / insert*/
-//        if(update == 1)
-//        {
-//            simpan.setText("Update Data");
-//            id_anggota.setText(intent_id_anggota);
-//            //id_anggota.setVisibility(View.GONE);
-//            setoran.setText(intent_setoran);
-//
-//        }
-
-
-        simpan.setOnClickListener(new View.OnClickListener() {
+        btnsimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 simpanData();
             }
         });
 
-        keluar.setOnClickListener(new View.OnClickListener() {
+        btnkeluar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent main = new Intent(TambungActivty.this,TabungActivity.class);
@@ -76,49 +58,6 @@ public class TambungActivty extends AppCompatActivity {
             }
         });
     }
-
-    private void Update_data()
-    {
-        pd.setMessage("Update Data");
-        pd.setCancelable(false);
-        pd.show();
-
-        StringRequest updateReq = new StringRequest(Request.Method.POST, ApiUrl.Api_Insert,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        pd.cancel();
-                        try {
-                            JSONObject res = new JSONObject(response);
-                            Toast.makeText(TambungActivty.this, "pesan : "+   res.getString("message") , Toast.LENGTH_SHORT).show();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                        startActivity( new Intent(TambungActivty.this,TabungActivity.class));
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        pd.cancel();
-                        Toast.makeText(TambungActivty.this, "pesan : Gagal Insert Data", Toast.LENGTH_SHORT).show();
-                    }
-                }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> map = new HashMap<>();
-                map.put("id_anggota",id_anggota.getText().toString());
-                map.put("setoran",setoran.getText().toString());
-
-                return map;
-            }
-        };
-
-     //   AppController.getInstance().addToRequestQueue(updateReq);
-    }
-
-
 
     private void simpanData()
     {
@@ -152,8 +91,8 @@ public class TambungActivty extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> map = new HashMap<>();
-                map.put("id_anggota",id_anggota.getText().toString());
-                map.put("setoran",setoran.getText().toString());
+                map.put("id_anggota",id.getText().toString());
+                map.put("setoran",setor.getText().toString());
                 return map;
             }
         };
