@@ -20,8 +20,8 @@ public class AdapterData extends RecyclerView.Adapter<AdapterData.ExampleViewHol
 
         public ExampleViewHolder(@NonNull View itemView) {
             super(itemView);
-            mTextView = itemView.findViewById(R.id.TextView);
-            mTextView2 = itemView.findViewById(R.id.TextView2);
+            mTextView = itemView.findViewById(R.id.textSetoranIdTabungan);
+            mTextView2 = itemView.findViewById(R.id.textSetoranIdAnggota);
         }
     }
 
@@ -33,7 +33,7 @@ public class AdapterData extends RecyclerView.Adapter<AdapterData.ExampleViewHol
     @NonNull
     @Override
     public ExampleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_item, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_setoran, parent, false);
         return new ExampleViewHolder(v);
     }
 
