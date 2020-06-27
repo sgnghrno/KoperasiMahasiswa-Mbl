@@ -1,36 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TamrikActivity"
-    android:padding="15dp"
-    android:background="@drawable/bgg1"
     android:layout_gravity="center"
-    android:orientation="vertical">
+    android:background="@drawable/bgg1"
+    android:orientation="vertical"
+    android:padding="15dp"
+    tools:context=".TamrikActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="500dp"
         android:layout_gravity="center"
         android:orientation="vertical">
+
         <LinearLayout
-            android:orientation="vertical"
-            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="25dp">
+            android:layout_margin="25dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
             <ImageView
-                android:background="@drawable/kopma"
                 android:layout_width="70dp"
-                android:layout_height="70dp" />
+                android:layout_height="70dp"
+                android:background="@drawable/kopma" />
+
             <TextView
-                android:text="Penarikan Tabungan"
-                android:layout_marginTop="10dp"
-                android:textColor="@android:color/black"
-                android:textStyle="bold"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Penarikan Tabungan"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ID Anggota :  "
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_tarik"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
@@ -38,53 +58,41 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ID Anggota :  "
-                android:textStyle="bold"
-                android:textColor="@color/colorPrimary"/>
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/id_anggota"
-                android:text="" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Uang Bayar: Rp  "
-                android:textStyle="bold"
-                android:textColor="@color/colorPrimary"/>
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold" />
+
             <EditText
+                android:id="@+id/penarikan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/penarikan"
-                android:text=""
-                android:inputType="number"/>
+                android:inputType="number"
+                android:text="" />
         </LinearLayout>
+
         <Button
-            android:layout_marginTop="30dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/tarik"
-            android:text="Tarik Tabungan"
-            android:background="@color/colorAccent"
-            android:textStyle="bold"
-            android:textColor="#ffffff"
-            android:layout_marginBottom="8dp" />
-        <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/keluar"
-            android:text="KELUAR"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="8dp"
             android:background="@color/colorAccent"
+            android:text="Tarik Tabungan"
+            android:textColor="#ffffff"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/keluar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:text="KELUAR"
             android:textColor="#FFFFFF"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
     </LinearLayout>
 
 </ScrollView>
